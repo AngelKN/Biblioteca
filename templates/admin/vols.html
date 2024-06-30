@@ -1,0 +1,81 @@
+{% include 'admin/cabecera.html'%}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="boton-modal btn-wsp">
+                <label for="btn-modal" class="fa fa-whatsapp icono">
+                    +
+                </label>
+            </div>
+            <input type="checkbox" id="btn-modal">
+
+            <div class="container-modal">
+                <div class="card-header">Datos del libro</div>
+                <div class="card-body content-modal">
+                    <form action="/admin/vols/guardar" method="post" enctype="multipart/form-data">
+                        <div>
+                            <label for="txtNombre" class="form-label mt-4">Libro</label>
+                            <select class="form-select" id="txtNombre" name="txtNombre">
+                            {% for libro in libros %}
+                              <option name="txtNombre" value="{{libro[1]}}">{{libro[1]}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtVol" class="form-label">Volumen:</label>
+                            <input required type="text" class="form-control" name="txtVol" id="txtVol" aria-describedby="helpId" placeholder="Escriba el nombre del libro"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtImagen" class="form-label">Imagen:</label>
+                            <input required type="file" class="form-control" name="txtImagen" id="txtImagen" aria-describedby="helpId" placeholder="Seleccione la imagen"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtUrl" class="form-label">URL Descargar:</label>
+                            <input required type="text" class="form-control" name="txtUrl" id="txtUrl" aria-describedby="helpId" placeholder="Escriba la URl de descarga"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Agregar
+                        </button>
+                    </form>
+                    <footer><label for="btn-modal" class="cerrar-modal">cancelar</label></footer>
+                </div>
+            </div>
+        </div>
+        <div class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">ID<span class="icon-arrow">&UpArrow;</span></th>
+                        <th scope="col">Volumen<span class="icon-arrow">&UpArrow;</span></th>
+                        <th scope="col">Imagen<span class="icon-arrow">&UpArrow;</span></th>
+                        <th scope="col">Leer<span class="icon-arrow">&UpArrow;</span></th>
+                        <th scope="col">Acciones<span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vol in vols %}
+                    <tr class="">
+                        <td>{{vol[0]}}</td>
+                        <td>{{vol[1]}}</td>
+                        <td>
+                            <img width="60" src="https://drive.google.com/thumbnail?id={{vol[2]}}" class="img-fluid rounded-top" alt=""/>
+                        </td>
+                        <td>
+                            <a name="" id="" class="btn btn-primary" href="{{vol[3]}}" role="button">Button</a>
+                            
+                        </td>
+                        <td>
+                            <form action="/admin/vols/borrar" method="post">
+                                <input value="{{vol[0]}}" type="hidden" name="txtId" id="txtId">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+{% include 'admin/pie.html'%}

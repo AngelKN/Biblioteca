@@ -1,0 +1,36 @@
+{% include 'sitio/cabecera.html'%}
+    <div class="table__body">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Volumen<span class="icon-arrow">&UpArrow;</span></th>
+                    <th scope="col">Imagen<span class="icon-arrow">&UpArrow;</span></th>
+                    <th scope="col">Leer<span class="icon-arrow">&UpArrow;</span></th>
+                    <th scope="col">Acciones<span class="icon-arrow">&UpArrow;</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vol in vols %}
+                <tr class="">
+
+                    <td>{{vol[1]}}</td>
+                    <td>
+                        <img width="60" src="https://drive.google.com/thumbnail?id={{vol[2]}}" class="img-fluid rounded-top" alt=""/>
+                    </td>
+                    <td>
+                        <a name="" id="" class="btn btn-primary" href="{{vol[3]}}" role="button">Button</a>
+                        
+                    </td>
+                    <td>
+                        <form action="/admin/vols/borrar" method="post">
+                            <input value="{{vol[0]}}" type="hidden" name="txtId" id="txtId">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
+    </div>
+</div>
+{% include 'sitio/pie.html'%}

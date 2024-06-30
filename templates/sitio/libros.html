@@ -1,0 +1,54 @@
+{% include 'sitio/cabecera.html'%}
+    <div class="row">
+        <div class="container col-3">
+            <div class="">
+                <div class="card">
+                    <img src="https://drive.google.com/uc?export=view&id=1HnZlDbpQaDLUbTvRnUZansQVkTzy8fV_" alt="">
+                    <div class="card-header">Filtros</div>
+                    <div class="card-body">
+                        <form action="/libros" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <p style="margin: 5px;">Categorias:</p>
+                                <div class="custom-combobox-container">
+                                    <div class="custom-combobox" onclick="showOptions(this)">
+                                        <input type="text" id="inputCheckbox" name="filtros" readonly>
+                                        <img src="img/arrow.png">
+                                    </div>
+                                    <div name="filtros" class="options-container" id="divOptions" onmouseleave="hideOptions(this)">
+                                        {% for cat in categorias %}
+                                        <label name="filtros" for="{{cat[1]}}"> <input type="checkbox" id="{{cat[1]}}" value="{{cat[1]}}"> {{cat[1]}} </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                Buscar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container col-9">
+            <div class="row">
+                {% for libro in libros %}
+                <div class="col-md-3">
+                    <div class="card">                
+                        <img class="card-img-top" src="https://drive.google.com/thumbnail?id={{libro[2]}}" class="img-fluid rounded-top" alt=""/>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ libro[1] }}</h4>
+
+                            <form action="/vols" method="post">
+                                <input value="{{libro[0]}}" type="hidden" name="idlibro" id="txtId">
+                                <p class="card-text">
+                                    <button type="submit" class="btn btn-danger">ver</button> 
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </div>        
+{% include 'sitio/pie.html'%}
